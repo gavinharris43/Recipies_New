@@ -1,5 +1,4 @@
-testMessage=This is in english
-GreetingMessage=Hello world
+GreetingMessage=Welcome to user application
 login=Login
 password=Password
 username=Username

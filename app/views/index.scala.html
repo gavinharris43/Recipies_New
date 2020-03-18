@@ -1,5 +1,7 @@
 @(message: String)(implicit messages: MessagesProvider, session: Session)
 
-@main("Welcome to Play") {
+@main(messages.messages("GreetingMessage")) {
+
+    <h3>@messages.messages("GreetingMessage")</h3>
 
 }

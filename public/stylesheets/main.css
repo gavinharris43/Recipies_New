@@ -62,6 +62,7 @@ a{color:#80c846;}a:hover{color:#6dae38;}
 p{margin:1em 0;}
 h1{-webkit-font-smoothing:antialiased;}
 h2{font-weight:bold;font-size:28px;}
+h3{font-weight:bold;font-size:18px;}
 hr{clear:both;margin:20px 0 25px 0;border:none;border-top:1px solid #444;visibility:visible;display:block;}
 section{padding:50px 0;}
 body{background:#f5f5f5;background:#fff;color:#555;font:15px "Helvetica Nueue",sans-serif;padding:0px 0 0px;}
