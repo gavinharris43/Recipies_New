@@ -2,7 +2,6 @@ package models
 
 import play.api.data.Form
 import play.api.data.Forms._
-import play.api.db
 
 case class LoginDetails(username: String, password: String)
 

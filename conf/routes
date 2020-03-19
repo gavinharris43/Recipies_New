@@ -10,7 +10,10 @@ POST        /createFromJson              controllers.ApplicationUsingJsonReaders
 
 GET         /signup                      controllers.AccountCreationController.signup
 POST        /signup                      controllers.AccountCreationController.create
-#POST        /delete                    controllers.AccountCreationController.delete
+GET        /delete                      controllers.AccountCreationController.delete
+POST       /delete                      controllers.AccountCreationController.deleteSubmit
+GET         /search                      controllers.AccountCreationController.findByUsername
+GET         /searchResult                controllers.AccountCreationController.findByUsernameSubmit
 
 
 GET         /homepageInWelsh             controllers.LanguageController.homePageInWelsh

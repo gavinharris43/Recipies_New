@@ -7,3 +7,4 @@ name=Enw
 age=Oedran
 signup=Cofrestru
 createAccount=Creu cyfrif
+search= Chwilio

@@ -1,12 +1,12 @@
-@*@(form :Form[LoginDetails])(implicit messagesProvider: MessagesProvider, session: Session)*@
+@(form :Form[LoginDetails])(implicit messagesProvider: MessagesProvider, session: Session)
 
-@*    @main("Delete") {*@
+    @main("Delete") {
 
-@*        <div>*@
-@*       @helper.form(routes.AccountCreationController.delete()) {*@
-@*            @helper.inputText(form("username"), '_label -> messagesProvider.messages("username"), '_showConstraints -> false)*@
-@*            @helper.inputPassword(form("password"), '_label -> messagesProvider.messages("password"), '_showConstraints -> false)*@
-@*            <button type="submit">@messagesProvider.messages("deleteAccount")</button>*@
-@*        }*@
-@*        </div>*@
-@*    }*@
+        <div>
+       @helper.form(routes.AccountCreationController.deleteSubmit()) {
+            @helper.inputText(form("username"), '_label -> messagesProvider.messages("username"), '_showConstraints -> false)
+            @helper.inputPassword(form("password"), '_label -> messagesProvider.messages("password"), '_showConstraints -> false)
+            <button type="submit">@messagesProvider.messages("deleteAccount")</button>
+        }
+        </div>
+    }
