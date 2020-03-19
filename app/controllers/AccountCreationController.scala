@@ -11,9 +11,7 @@ import reactivemongo.api.Cursor
 import reactivemongo.play.json._
 import reactivemongo.play.json.collection.{JSONCollection, _}
 
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContext, Future}
-import scala.util.Try
+import scala.concurrent.{ExecutionContext, Future}
 
 class AccountCreationController @Inject()(
                                            components: ControllerComponents, authAction: AuthenticationAction,
@@ -41,7 +39,7 @@ class AccountCreationController @Inject()(
     Ok(views.html.delete(LoginDetails.loginForm))
   }
 
-  def deleteSubmit(): Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
+  def deleteSubmit: Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     Person.accountDeletion.bindFromRequest.fold({ formWithErrors =>
       Future.successful(BadRequest(views.html.delete(formWithErrors)))
     }, { el =>
@@ -59,11 +57,12 @@ class AccountCreationController @Inject()(
             Cursor.FailOnError[List[Person]]()
           )
         )
-      futureUsersList.map {
-        persons =>
-          persons.foreach(person => collection.flatMap(_.remove(person)).map { _ => Ok("User Removed")}
-          )
-          Ok("users removed")
+
+      futureUsersList.map { value =>
+
+        collection.flatMap(_.remove(value.head)).map { _ => Ok("User Removed")
+        }
+        Ok("users deleted")
       }
     })
   }
@@ -73,7 +72,7 @@ class AccountCreationController @Inject()(
   }
 
 
-  def findByUsernameSubmit: Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
+  def findByUsernameSubmit: Action[AnyContent] = authAction.async { implicit requesr: Request[AnyContent] =>
     Search.accountSearchUsername.bindFromRequest.fold({ formWithErrors =>
       Future.successful(BadRequest(views.html.search(formWithErrors)))
     }, { search =>

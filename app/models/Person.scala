@@ -59,7 +59,7 @@ object JsonFormats {
 
   import play.api.libs.json.Json
 
-  implicit val BSONObjectIDFormat: OFormat[BSONObjectID] = Json.format[BSONObjectID]
+  implicit val bsonObjectIDFormat: OFormat[BSONObjectID] = Json.format[BSONObjectID]
   implicit val personFormat: OFormat[Person] = Json.format[Person]
   implicit val loginDetailsFormat: OFormat[LoginDetails] = Json.format[LoginDetails]
 }
