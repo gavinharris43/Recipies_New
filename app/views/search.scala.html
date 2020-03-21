@@ -1,9 +1,9 @@
-@(form :Form[Search])(implicit messagesProvider: MessagesProvider, session: Session)
+@(form: Form[Search])(implicit messagesProvider: MessagesProvider, session: Session)
 
 
-        <div>
-         @helper.form(routes.AccountCreationController.findByUsernameSubmit()) {
-            @helper.inputText(form("username"), '_label -> messagesProvider.messages("username"), '_showConstraints -> false)
-            <button type="submit">@messagesProvider.messages("search")</button>
-        }
-        </div>
+<div>
+    @helper.form(routes.AccountCreationController.findByUsernameSubmit()) {
+        @helper.inputText(form("username"), '_label -> messagesProvider.messages("username"), '_showConstraints -> false)
+        <button type="submit">@messagesProvider.messages("search")</button>
+    }
+</div>

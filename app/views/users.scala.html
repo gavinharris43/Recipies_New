@@ -1,0 +1,10 @@
+@import Search.accountSearchUsername
+@(message: String)(implicit messages: MessagesProvider, session: Session)
+
+@main(messages.messages("GreetingMessage")) {
+
+    <h3>@messages.messages("GreetingMessage")</h3>
+
+    @search.apply(accountSearchUsername)
+
+}
