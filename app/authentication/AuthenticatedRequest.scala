@@ -4,6 +4,7 @@ package authentication
 import javax.inject.Inject
 import models.JsonFormats._
 import models.{LoginDetails, Person}
+import play.api.Logger
 import play.api.libs.json.{JsObject, Json}
 import play.api.mvc._
 import reactivemongo.api.Cursor
@@ -12,6 +13,7 @@ import service.MongoService
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.util.{Failure, Success, Try}
 
 class AuthenticatedRequest[A](val username: String, request: Request[A]) extends WrappedRequest[A](request)
 
@@ -47,8 +49,7 @@ class AuthenticationAction @Inject()(val parser: BodyParsers.Default)(implicit v
 
   def getUsername(username: String): Option[LoginDetails] = {
     val userList: List[LoginDetails] = Await.result(getLoginList(username), Duration.Inf).map(el => el.loginDetails)
-    Option(userList.head)
-  }
-
+    userList.headOption
+    }
 
 }

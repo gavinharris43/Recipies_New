@@ -12,6 +12,7 @@ import reactivemongo.play.json._
 import reactivemongo.play.json.collection.{JSONCollection, _}
 
 import scala.concurrent.{ExecutionContext, Future}
+import scala.util.{Failure, Success}
 
 class AccountCreationController @Inject()(
                                            components: ControllerComponents, authAction: AuthenticationAction,
@@ -58,11 +59,12 @@ class AccountCreationController @Inject()(
           )
         )
 
-      futureUsersList.map { value =>
+      futureUsersList.flatMap{ value =>
 
         collection.flatMap(_.remove(value.head)).map { _ => Ok("User Removed")
         }
-        Ok("users deleted")
+
+
       }
     })
   }
