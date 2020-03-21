@@ -8,3 +8,7 @@ age=Age
 signup=Sign Up
 createAccount=Create Account
 search=Search
+delete = Delete
+findAll = Find All Users
+updatePassword=  Update Password
+newPassword= New Password

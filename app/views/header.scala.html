@@ -3,6 +3,10 @@
 <div>
     @if(session.get("username").nonEmpty) {
         <a class = "button" href="@routes.LoginController.logout()">@messages.messages("logout")</a>
+        <a class = "button" href="@routes.AccountCreationController.delete()">@messages.messages("delete")</a>
+        <a class = "button" href="@routes.HomeController.showRecords()">@messages.messages("findAll")</a>
+        <a class = "button" href="@routes.AccountCreationController.updatePassword()">@messages.messages("updatePassword")</a>
+
     } else {
         <a class = "button" href="@routes.LoginController.login()">@messages.messages("login")</a>
         <a class = "button" href="@routes.AccountCreationController.signup()">@messages.messages("signup")</a>

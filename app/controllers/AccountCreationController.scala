@@ -3,7 +3,7 @@ package controllers
 import authentication.AuthenticationAction
 import javax.inject.Inject
 import models.JsonFormats._
-import models.{LoginDetails, Person, Search}
+import models.{LoginDetails, Person, Search, UpdatePassword}
 import play.api.libs.json.Json
 import play.api.mvc._
 import play.modules.reactivemongo.{MongoController, ReactiveMongoApi, ReactiveMongoComponents}
@@ -12,7 +12,6 @@ import reactivemongo.play.json._
 import reactivemongo.play.json.collection.{JSONCollection, _}
 
 import scala.concurrent.{ExecutionContext, Future}
-import scala.util.{Failure, Success}
 
 class AccountCreationController @Inject()(
                                            components: ControllerComponents, authAction: AuthenticationAction,
@@ -36,11 +35,11 @@ class AccountCreationController @Inject()(
   }
 
   //TODO : Improve
-  def delete: Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+  def delete: Action[AnyContent] = authAction { implicit request: Request[AnyContent] =>
     Ok(views.html.delete(LoginDetails.loginForm))
   }
 
-  def deleteSubmit: Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
+  def deleteSubmit: Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
     Person.accountDeletion.bindFromRequest.fold({ formWithErrors =>
       Future.successful(BadRequest(views.html.delete(formWithErrors)))
     }, { el =>
@@ -72,6 +71,42 @@ class AccountCreationController @Inject()(
   def findByUsername: Action[AnyContent] = authAction { implicit request: Request[AnyContent] =>
     Ok(views.html.search(Search.accountSearchUsername))
   }
+
+  def updatePassword: Action[AnyContent] = authAction { implicit request: Request[AnyContent] =>
+    Ok(views.html.update(UpdatePassword.accountUpdatePassword))
+  }
+
+  def updatePasswordSubmit: Action[AnyContent] = authAction.async { implicit request: Request[AnyContent] =>
+    UpdatePassword.accountUpdatePassword.bindFromRequest.fold({ formWithErrors =>
+      Future.successful(BadRequest(views.html.update(formWithErrors)))
+    }, { el =>
+
+      val cursor: Future[Cursor[Person]] = collection.map {
+        _.find(Json.obj("username" -> el.username)).
+          sort(Json.obj("created" -> -1)).
+          cursor[Person]()
+      }
+
+      val futureUsersList: Future[List[Person]] =
+        cursor.flatMap(
+          _.collect[List](
+            -1,
+            Cursor.FailOnError[List[Person]]()
+          )
+        )
+
+      futureUsersList.map{ value =>
+
+//todo : implement
+//        collection.flatMap(_.update(
+//          selector  = BSONDocument("_id" -> value.head._id).set("password", el.UpdatePassword).map { _ => Ok("User Updated")
+//
+        Ok("To Be Implemented")
+        }
+
+    })
+  }
+
 
 
   def findByUsernameSubmit: Action[AnyContent] = authAction.async { implicit requesr: Request[AnyContent] =>

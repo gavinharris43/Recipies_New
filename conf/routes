@@ -10,6 +10,8 @@ GET         /signup                      controllers.AccountCreationController.s
 POST        /signup                      controllers.AccountCreationController.create
 GET         /delete                      controllers.AccountCreationController.delete
 POST        /delete                      controllers.AccountCreationController.deleteSubmit
+GET         /update                      controllers.AccountCreationController.updatePassword
+POST        /update                      controllers.AccountCreationController.updatePasswordSubmit
 GET         /search                      controllers.AccountCreationController.findByUsername
 GET         /searchResult                controllers.AccountCreationController.findByUsernameSubmit
 

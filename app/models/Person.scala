@@ -25,6 +25,18 @@ object Search {
 
 }
 
+object UpdatePassword {
+
+  val accountUpdatePassword: Form[UpdatePassword] = Form(
+    mapping(
+      "username" -> nonEmptyText,
+      "password"-> nonEmptyText,
+      "newPassword" -> nonEmptyText
+    )(UpdatePassword.apply)(UpdatePassword.unapply)
+  )
+
+}
+
 object Person {
 
   def apply(name: String, age: Int, username: String, password: String) = new Person(BSONObjectID.generate(), name, age, username, password)
@@ -65,5 +77,6 @@ object JsonFormats {
 }
 
 case class Search(username: String)
+case class UpdatePassword(username: String, password: String, UpdatePassword: String)
 
 
