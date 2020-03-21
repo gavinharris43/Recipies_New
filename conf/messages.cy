@@ -1,5 +1,4 @@
-testMessage=mae hyn yn Gymraeg
-GreetingMessage=Helo Byd
+GreetingMessage=Croeso i raglen defnyddiwr
 login=Mewngofnodi
 password=Cyfrinair
 username=Enw defnyddiwr
@@ -8,3 +7,4 @@ name=Enw
 age=Oedran
 signup=Cofrestru
 createAccount=Creu cyfrif
+search=Chwilio

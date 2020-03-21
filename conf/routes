@@ -4,17 +4,18 @@ GET         /login                       controllers.LoginController.login
 POST        /login                       controllers.LoginController.loginSubmit
 GET         /logout                      controllers.LoginController.logout
 
-
-GET         /createperson                controllers.ApplicationUsingJsonReadersWriters.create
-POST        /createFromJson              controllers.ApplicationUsingJsonReadersWriters.createFromJson
+GET         /findAll                     controllers.HomeController.showRecords
 
 GET         /signup                      controllers.AccountCreationController.signup
 POST        /signup                      controllers.AccountCreationController.create
-#POST        /delete                    controllers.AccountCreationController.delete
+GET         /delete                      controllers.AccountCreationController.delete
+POST        /delete                      controllers.AccountCreationController.deleteSubmit
+GET         /search                      controllers.AccountCreationController.findByUsername
+GET         /searchResult                controllers.AccountCreationController.findByUsernameSubmit
 
 
 GET         /homepageInWelsh             controllers.LanguageController.homePageInWelsh
 GET         /homepageInEnglish           controllers.LanguageController.homePageInEnglish
 
-GET         /findByName/:lastName        controllers.ApplicationUsingJsonReadersWriters.findByName(lastName: String)
+GET         /findByName/:lastName        controllers.AccountCreationController.findByName(lastName: String)
 GET         /assets/*file                controllers.Assets.at(path="/public", file)
