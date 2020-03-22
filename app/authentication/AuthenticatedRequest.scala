@@ -50,6 +50,6 @@ class AuthenticationAction @Inject()(val parser: BodyParsers.Default)(implicit v
   def getUsername(username: String): Option[LoginDetails] = {
     val userList: List[LoginDetails] = Await.result(getLoginList(username), Duration.Inf).map(el => el.loginDetails)
     userList.headOption
-    }
+  }
 
 }

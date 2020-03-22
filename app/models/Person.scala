@@ -5,7 +5,8 @@ import play.api.data.Forms._
 import play.api.libs.json.OFormat
 import reactivemongo.bson.BSONObjectID
 
-
+case class Search(username: String)
+case class UpdatePassword(username: String, password: String, UpdatePassword: String)
 case class Person(_id: BSONObjectID, name: String, age: Int, username: String, password: String) {
   val loginDetails: LoginDetails = LoginDetails(username, password)
   val id: BSONObjectID = _id
@@ -30,7 +31,7 @@ object UpdatePassword {
   val accountUpdatePassword: Form[UpdatePassword] = Form(
     mapping(
       "username" -> nonEmptyText,
-      "password"-> nonEmptyText,
+      "password" -> nonEmptyText,
       "newPassword" -> nonEmptyText
     )(UpdatePassword.apply)(UpdatePassword.unapply)
   )
@@ -42,7 +43,6 @@ object Person {
   def apply(name: String, age: Int, username: String, password: String) = new Person(BSONObjectID.generate(), name, age, username, password)
 
   def unapply(arg: Person): Option[(BSONObjectID, String, Int, String, String)] = Option((arg._id, arg.name, arg.age, arg.username, arg.password))
-
 
   val accountCreation: Form[Person] = Form(
     mapping(
@@ -64,7 +64,6 @@ object Person {
     )(LoginDetails.apply)
     (LoginDetails.unapply)
   )
-
 }
 
 object JsonFormats {
@@ -76,7 +75,5 @@ object JsonFormats {
   implicit val loginDetailsFormat: OFormat[LoginDetails] = Json.format[LoginDetails]
 }
 
-case class Search(username: String)
-case class UpdatePassword(username: String, password: String, UpdatePassword: String)
 
 

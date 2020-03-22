@@ -15,7 +15,6 @@ POST        /update                      controllers.AccountCreationController.u
 GET         /search                      controllers.AccountCreationController.findByUsername
 GET         /searchResult                controllers.AccountCreationController.findByUsernameSubmit
 
-
 GET         /homepageInWelsh             controllers.LanguageController.homePageInWelsh
 GET         /homepageInEnglish           controllers.LanguageController.homePageInEnglish
 
