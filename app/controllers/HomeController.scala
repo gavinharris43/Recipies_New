@@ -15,7 +15,7 @@ class HomeController @Inject()(cc: ControllerComponents, authAction: Authenticat
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def showRecords(): Action[AnyContent] = Action.async {
+  def showRecords(): Action[AnyContent] = authAction.async {
     mongoService.findAll().map(listOfUsers =>
       Ok(listOfUsers.toString())
     )

@@ -5,7 +5,6 @@ import play.api.data.Forms._
 
 case class LoginDetails(val username: String, password: String)
 
-
 object LoginDetails {
 
   val loginForm: Form[LoginDetails] = Form(
@@ -14,8 +13,6 @@ object LoginDetails {
       "password" -> nonEmptyText
     )(LoginDetails.apply)(LoginDetails.unapply)
   )
-
-
 
 
 }

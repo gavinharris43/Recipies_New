@@ -29,6 +29,7 @@ class LoginController @Inject()(components: ControllerComponents,
     Ok(views.html.login(LoginDetails.loginForm))
   }
 
+
   def loginSubmit(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     LoginDetails.loginForm.bindFromRequest.fold({ formWithErrors =>
       BadRequest(views.html.login(formWithErrors))
@@ -36,9 +37,10 @@ class LoginController @Inject()(components: ControllerComponents,
       if (checkIfUserIsValid(loginDetails))
         Redirect(routes.HomeController.index()).withSession(request.session + ("username" -> loginDetails.username))
       else
-        BadRequest(s"Incorrect username or password. $loginDetails ")
+        BadRequest(request2Messages.messages("incorrectLoginDetails"))
     })
   }
+
 
   def checkIfUserIsValid(details: LoginDetails): Boolean = {
     //    val personList: List[Person]=getLoginList(details).value.getOrElse(Try(List[Person]())).get
@@ -66,9 +68,11 @@ class LoginController @Inject()(components: ControllerComponents,
     )
   }
 
+
   def filterToJsonObj(filteredValue: String, value: String): JsObject = {
     Json.obj((filteredValue, Json.toJsFieldJsValueWrapper(value)))
   }
+
 
   def getUsername(username: String): Option[LoginDetails] = {
     val personList: List[Person] = Await.result(getLoginList(username), Duration.Inf)
